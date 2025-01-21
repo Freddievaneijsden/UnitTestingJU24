@@ -19,19 +19,38 @@ class RomanNumeralTest {
     @Test
     @DisplayName("Roman IV returns 4")
     void romanIvReturns4() {
-
+        int result = romanNumeral.convert("IV");
+        assertThat(result).isEqualTo(4);
     }
 
     @Test
     @DisplayName("Roman MMXXV returns 2025")
     void romanMmxxvReturns2025() {
+        int result = romanNumeral.convert("MMXXV");
 
+        assertThat(result).isEqualTo(2025);
     }
 
     @Test
     @DisplayName("Blank string input returns 0")
     void blankStringInputReturns0() {
+        int result = romanNumeral.convert("");
 
+        assertThat(result).isEqualTo(0);
     }
-  
+
+    @Test
+    @DisplayName("Roman X returns 10")
+    void romanXReturns10() {
+        int result = romanNumeral.convert("X");
+
+        assertThat(result).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("Test all possible characters")
+    void testAllPossibleCharacters() {
+        int result = romanNumeral.convert("MDCLXVI");
+        assertThat(result).isEqualTo(1666);
+    }
 }
