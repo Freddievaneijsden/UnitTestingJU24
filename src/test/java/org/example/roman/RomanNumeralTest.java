@@ -1,6 +1,8 @@
 package org.example.roman;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -52,5 +54,16 @@ class RomanNumeralTest {
     void testAllPossibleCharacters() {
         int result = romanNumeral.convert("MDCLXVI");
         assertThat(result).isEqualTo(1666);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "I, 1",
+            "IV, 4",
+            "MM, 2000"
+    })
+    void convertRomanNumber(String roman, int numeral) {
+        int result = romanNumeral.convert(roman);
+        assertThat(result).isEqualTo(numeral);
     }
 }
