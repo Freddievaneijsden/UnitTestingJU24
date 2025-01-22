@@ -4,7 +4,7 @@ public class Alarm {
     private final double LowPressureThreshold;
     private final double HighPressureThreshold;
 
-    Sensor sensor;
+    Sensible sensor;
 
     boolean alarmOn = false;
 
@@ -12,7 +12,7 @@ public class Alarm {
         this(new Sensor(), new Threshold(17, 21));
     }
 
-    public Alarm(Sensor sensor, Threshold threshold) {
+    public Alarm(Sensible sensor, Threshold threshold) {
         LowPressureThreshold = threshold.low();
         HighPressureThreshold = threshold.high();
         this.sensor = sensor;
