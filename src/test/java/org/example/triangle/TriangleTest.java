@@ -3,21 +3,33 @@ package org.example.triangle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TriangleTest {
 
+    static Stream<Arguments> pointProvider() {
+        return Stream.of(
+                Arguments.of(new Point(0, 0), new Point(1, 1), new Point(2, 0)),
+                Arguments.of(new Point(1, 2), new Point(3, 5), new Point(5, 4)),
+                Arguments.of(new Point(1, 1), new Point(4, 5), new Point(6, 1)),
+                Arguments.of(new Point(2, 2), new Point(4, 5), new Point(5, 1)),
+                Arguments.of(new Point(3, 1), new Point(6, 3), new Point(5, 7)) );
+    }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource ("pointProvider")
     @DisplayName("CreateTriangleWithPointArrayConstructor")
-    void createTriangleWithPointArrayConstructor() {
-        Point p1 = new Point(2, 2);
-        Point p2 = new Point(2, 2);
-        Point p3 = new Point(2, 2);
-        Point [] points = {p1, p2, p3};
+    void createTriangleWithPointArrayConstructor(Point p1, Point p2, Point p3) {
+        Point[] points = {p1, p2, p3};
         Triangle triangle = new Triangle(points);
-        Assertions.assertNotNull(triangle);
+        assertNotNull(triangle);
     }
 
     @Test
@@ -26,9 +38,9 @@ class TriangleTest {
         double d1 = 3.0;
         double d2 = 4.0;
         double d3 = 5.0;
-        double [] doubles = {d1, d2, d3};
+        double[] doubles = {d1, d2, d3};
         Triangle triangle = new Triangle(doubles);
-        Assertions.assertNotNull(triangle);
+        assertThat(triangle.sides).containsExactly(3.0, 4.0, 5.0);
     }
 
     @Test
@@ -40,7 +52,7 @@ class TriangleTest {
 
     @Test
     @DisplayName("TestIfTriangleIsScalene")
-    void testIfTriangleIsScalene()  {
+    void testIfTriangleIsScalene() {
         Point p1 = new Point(2, 2);
         Point p2 = new Point(2, 5);
         Point p3 = new Point(2, 6);
